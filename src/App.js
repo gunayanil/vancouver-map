@@ -3,6 +3,8 @@ import "./App.css";
 import Map from "./Map";
 import ListPlaces from "./ListPlaces";
 import * as _ from "lodash";
+import escapeRegExp from "escape-string-regexp";
+
 
 
 class App extends Component {
@@ -14,9 +16,6 @@ class App extends Component {
             markerID: -1,
             newmarkers: [],
         };
-
-        // this.changeMarkers = this.changeMarkers.bind(this);
-        // this.updateQuery = this.updateQuery.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +26,8 @@ class App extends Component {
             .then(data => {
                 this.setState({
                     places: data.response.venues,
-                    markers: data.response.venues
+                    markers: data.response.venues,
+                    newmarkers: data.response.venues
                 });
             })
             .catch(error => {
@@ -49,23 +49,23 @@ class App extends Component {
         });
     };
 
-  
 
-    /* DOESN'T WORK RETURNS EMPTY ARRAY! */
     changeMarkers = newValue =>  {
-        
+        if(newValue) {
+        const match = new RegExp(escapeRegExp(newValue), "i");
         const newmarkers = this.state.markers.filter(
-             place => place.name === newValue
+             place => match.test(place.name)
          );
-
-        // newValue really holds the value of input when this method is called!
-
-        console.log("The value of input: ", newValue);
 
         this.setState({
             newmarkers: newmarkers,
-            markers: newmarkers
         });
+
+    } else {
+        this.setState({
+            newmarkers: this.state.places
+        })
+        }
     };
 
     toggleListPlaces = () => {
@@ -77,31 +77,18 @@ class App extends Component {
         if (body.classList.contains("show-nav")) {
             body.classList.remove("show-nav");
         } else {
-            // If sidebar is hidden:
             body.classList.add("show-nav");
         }
     };
 
 
     render() {
-        console.log("New markers" +  this.state.newmarkers);
-        console.log("Places: " + this.state.places);
-        console.log("Markers:" + this.state.markers);
-        /**** Before calling changeMarkers Method *****/
-        
-        // newmarkers is empty, places and markers hold locations
-
-        /**** After calling changeMarkers() Method *****/
-
-        // newmarkers is empty, markers is empty, places hold locations.
-
-
         return (
             <div className="App">
                 <Map
                     role="application"
                     places={this.state.places}
-                    markers={this.state.markers}
+                    markers={this.state.newmarkers}
                     openInfoHandler={this.openInfo}
                     closeInfoHandler={this.closeInfo}
                     markerID={this.state.markerID}
