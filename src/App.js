@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Map from "./Map";
 import ListPlaces from "./ListPlaces";
-import * as _ from "lodash";
 import escapeRegExp from "escape-string-regexp";
-
-
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +11,7 @@ class App extends Component {
             places: [],
             markers: [],
             markerID: -1,
-            newmarkers: [],
+            newmarkers: []
         };
     }
 
@@ -31,10 +28,10 @@ class App extends Component {
                 });
             })
             .catch(error => {
-                console.log("Someting went wrong ", error);
+                alert("Someting went wrong ", error);
             });
 
-            document.getElementById('nav-toggle').focus();       
+        document.getElementById("nav-toggle").focus();
     }
 
     openInfo = (e, id) => {
@@ -49,22 +46,20 @@ class App extends Component {
         });
     };
 
+    changeMarkers = newValue => {
+        if (newValue) {
+            const match = new RegExp(escapeRegExp(newValue), "i");
+            const newmarkers = this.state.markers.filter(place =>
+                match.test(place.name)
+            );
 
-    changeMarkers = newValue =>  {
-        if(newValue) {
-        const match = new RegExp(escapeRegExp(newValue), "i");
-        const newmarkers = this.state.markers.filter(
-             place => match.test(place.name)
-         );
-
-        this.setState({
-            newmarkers: newmarkers,
-        });
-
-    } else {
-        this.setState({
-            newmarkers: this.state.places
-        })
+            this.setState({
+                newmarkers: newmarkers
+            });
+        } else {
+            this.setState({
+                newmarkers: this.state.places
+            });
         }
     };
 
@@ -80,7 +75,6 @@ class App extends Component {
             body.classList.add("show-nav");
         }
     };
-
 
     render() {
         return (
