@@ -9,6 +9,8 @@ import {
 
 const mystyle = require("./style.json");
 
+
+
 const Map = withScriptjs(
 	withGoogleMap(props => (
 		<GoogleMap
@@ -17,6 +19,7 @@ const Map = withScriptjs(
 			defaultZoom={14}
 			defaultCenter={{ lat: 49.2827291, lng: -123.1207375 }}
 		>
+		
 			{props.markers.map(restaurant => {
 				let marker = (
 					<Marker
@@ -61,11 +64,13 @@ const Map = withScriptjs(
 							</InfoWindow>
 						)}
 					</Marker>
+				
 				);
 				return marker;
 			})}
 		</GoogleMap>
-	))
+	)) 
 );
+
 
 export default Map;

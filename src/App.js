@@ -25,12 +25,13 @@ class App extends Component {
                 this.setState({
                     places: data.response.venues,
                     markers: data.response.venues,
-                    newmarkers: data.response.venues
+                    newmarkers: data.response.venues,
                 });
             })
             .catch(error => {
-                fsError: true
-                alert("Someting went wrong ", error);
+                this.setState({fsError: true})
+                alert("Someting went wrong ");
+                console.log("Foursquare error: ", error.message)
             });
 
             // Google Maps Error
@@ -84,8 +85,10 @@ class App extends Component {
     };
 
     render() {
+        console.log("fsError: ", this.state.fsError);
         return (
             <div className="App">
+             
                 <Map
                     role="application"
                     places={this.state.places}
@@ -93,7 +96,6 @@ class App extends Component {
                     openInfoHandler={this.openInfo}
                     closeInfoHandler={this.closeInfo}
                     markerID={this.state.markerID}
-                    fsStatus={this.state.fsError}
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBiE_oUg0mzVJbxj39WchHpyEO--o_rFQ&v=3"
                     loadingElement={<div style={{ height: "100%" }} />}
                     containerElement={<div style={{ height: "100%" }} />}
@@ -106,7 +108,9 @@ class App extends Component {
                     changeMarkersHandler={this.changeMarkers}
                     focusIcon={this.focusIcon}
                 />
+         
             </div>
+            
         );
     }
 }
