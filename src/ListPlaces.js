@@ -16,7 +16,6 @@ class ListPlaces extends Component {
 			toggleListHandler,
 			locations,
 			openInfoHandler,
-			focusIcon
 		} = this.props;
 
 		let showLocations;
