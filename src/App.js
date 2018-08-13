@@ -11,7 +11,8 @@ class App extends Component {
             places: [],
             markers: [],
             markerID: -1,
-            newmarkers: []
+            newmarkers: [],
+            fsError: false
         };
     }
 
@@ -28,8 +29,14 @@ class App extends Component {
                 });
             })
             .catch(error => {
+                fsError: true
                 alert("Someting went wrong ", error);
             });
+
+            // Google Maps Error
+            window.gm_authFailure = function() {
+             alert('Google maps failed to load!');
+         }
 
         document.getElementById("nav-toggle").focus();
     }
@@ -86,6 +93,7 @@ class App extends Component {
                     openInfoHandler={this.openInfo}
                     closeInfoHandler={this.closeInfo}
                     markerID={this.state.markerID}
+                    fsStatus={this.state.fsError}
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBiE_oUg0mzVJbxj39WchHpyEO--o_rFQ&v=3"
                     loadingElement={<div style={{ height: "100%" }} />}
                     containerElement={<div style={{ height: "100%" }} />}
