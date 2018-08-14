@@ -52,6 +52,9 @@ class ListPlaces extends Component {
 										onClick={e =>
 											openInfoHandler(e, location.id)
 										}
+										onKeyPress={e =>
+											openInfoHandler(e, location.id)
+										}
 										tabIndex="0"
 									>
 										{location.name}
@@ -64,9 +67,11 @@ class ListPlaces extends Component {
 				</aside>
 				<a
 					onClick={toggleListHandler}
+					onKeyPress={toggleListHandler}
 					id="nav-toggle"
 					className="position"
 					tabIndex="0"
+					role="button"
 				>
 					<span />
 				</a>
