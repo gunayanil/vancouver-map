@@ -15,7 +15,7 @@ const Map = withScriptjs(
 	withGoogleMap(props => (
 		<GoogleMap
 			defaultOptions={{ styles: mystyle }}
-			aria-labelledby={`Vancouver Restaurants Map`}
+			aria-label={`Vancouver Restaurants Map`}
 			defaultZoom={14}
 			defaultCenter={{ lat: 49.2827291, lng: -123.1207375 }}
 		>
@@ -23,7 +23,7 @@ const Map = withScriptjs(
 			{props.markers.map(restaurant => {
 				let marker = (
 					<Marker
-						aria-labelledby={`${restaurant.name} marker`}
+						aria-label={`${restaurant.name} marker`}
 						id={restaurant.id}
 						key={restaurant.id}
 						name={restaurant.name}
@@ -50,7 +50,7 @@ const Map = withScriptjs(
 								<div
 									className="info-window"
 									tabIndex={0}
-									aria-labelledby={`${
+									aria-label={`${
 										restaurant.name
 									} information`}
 								>
