@@ -102,6 +102,9 @@ aside {
   font-family: sans-serif;
   font-weight: 300;
   transition: all .3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /*white-space: nowrap;*/
 }
 
 aside h2 {
