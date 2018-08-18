@@ -11,33 +11,39 @@ class App extends Component {
             places: [],
             markers: [],
             markerID: -1,
-            newmarkers: [],
-            fsError: false
+            newmarkers: []
+            // fsError: false
         };
     }
 
     componentDidMount() {
         fetch(
-            "https://api.foursquare.com/v2/venues/search?ll=49.2827291,-123.1207375&query=restaurant&limit=7&client_id=WZAFHLFXX3BPD4BZDML1WR5G0MP1VGDV4INB04QN0HVU4TQQ&client_secret=1F0FFNXXAW0DBAB2K3Q0UFH2XZSVBLIMFKY5MUOHZV21F4GB&v=20180804"
+            "https://api.foursquare.com/v2/venues/search?ll=49.2827291,-123.1207375&query=restaurant&client_id=WZAFHLFXX3BPD4BZDML1WR5G0MP1VGDV4INB04QN0HVU4TQQ&client_secret=1F0FFNXXAW0DBAB2K3Q0UFH2XZSVBLIMFKY5MUOHZV21F4GB&v=20180804"
         )
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    alert("Foursquare failed to load");
+                    throw new Error("Foursquare error");
+                }
+            })
             .then(data => {
                 this.setState({
                     places: data.response.venues,
                     markers: data.response.venues,
-                    newmarkers: data.response.venues,
+                    newmarkers: data.response.venues
                 });
             })
             .catch(error => {
-                this.setState({fsError: true})
-                alert("Someting went wrong ");
-                console.log("Foursquare error: ", error.message)
+                alert("The data can't be loaded.");
+                console.log("Foursquare error", error);
             });
 
-            // Google Maps Error
-            window.gm_authFailure = function() {
-             alert('Google maps failed to load!');
-         }
+        // Google Maps Error
+        window.gm_authFailure = function() {
+            alert("Google maps failed to load!");
+        };
 
         document.getElementById("nav-toggle").focus();
     }
@@ -85,10 +91,9 @@ class App extends Component {
     };
 
     render() {
-        console.log("fsError: ", this.state.fsError);
+        // console.log("fsError: ", this.state.fsError);
         return (
             <div className="App">
-             
                 <Map
                     role="application"
                     places={this.state.places}
@@ -108,9 +113,7 @@ class App extends Component {
                     changeMarkersHandler={this.changeMarkers}
                     focusIcon={this.focusIcon}
                 />
-         
             </div>
-            
         );
     }
 }
