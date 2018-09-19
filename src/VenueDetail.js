@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+
 class VenueDetail extends Component {
   state = {
     imgUrl: [],
@@ -37,9 +38,13 @@ class VenueDetail extends Component {
       })
       .then(data => {
         // Proper Image url for Foursquare
+        if(data.response.photos.items[0]){
         prefix = data.response.photos.items[0].prefix;
         suffix = data.response.photos.items[0].suffix;
         url = `${prefix}150x150${suffix}`;
+        } else {
+          url = "./images/restaurant.png";
+        }
 
         this.setState({
           imgUrl: url,
