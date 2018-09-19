@@ -1,4 +1,5 @@
 import React from "react";
+import VenueDetail from "./VenueDetail";
 import {
 	withScriptjs,
 	withGoogleMap,
@@ -8,8 +9,6 @@ import {
 } from "react-google-maps";
 
 const mystyle = require("./style.json");
-
-
 
 const Map = withScriptjs(
 	withGoogleMap(props => (
@@ -35,6 +34,7 @@ const Map = withScriptjs(
 						defaultAnimation={window.google.maps.Animation.DROP}
 						onClick={e => {
 							props.openInfoHandler(e, restaurant.id);
+							
 						}}
 						animation={
 							props.markerID === restaurant.id &&
@@ -57,11 +57,14 @@ const Map = withScriptjs(
 									<p className="restaurant-name">
 										{restaurant.name}
 									</p>
+									<VenueDetail place={restaurant}/>
 									<p className="restaurant-address">
 										{restaurant.location.address}
 									</p>
+									
 								</div>
-							</InfoWindow>
+								
+						</InfoWindow>
 						)}
 					</Marker>
 				
