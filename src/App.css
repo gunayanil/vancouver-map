@@ -20,6 +20,21 @@ body,
 	font-weight: bold;
 }
 
+.info-window  .details {
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  width: 200px;
+}
+
+.details #rating {
+  font-weight: bold;
+}
+
+.details hr {
+  border-top: 1px solid #eee;
+}
+
 /* ListPlaces - Navbar*/
 
 
