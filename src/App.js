@@ -12,7 +12,6 @@ class App extends Component {
             markers: [],
             markerID: -1,
             newmarkers: []
-            // fsError: false
         };
     }
 
@@ -41,16 +40,19 @@ class App extends Component {
             });
 
         // Google Maps Error
-        window.gm_authFailure = function() {
+        window.gm_authFailure = function () {
             alert("Google maps failed to load!");
         };
 
         document.getElementById("nav-toggle").focus();
+
+        /********************* */
     }
+
 
     openInfo = (e, id) => {
         this.setState({
-            markerID: id
+            markerID: id,
         });
     };
 
@@ -91,7 +93,6 @@ class App extends Component {
     };
 
     render() {
-        // console.log("fsError: ", this.state.fsError);
         return (
             <div className="App">
                 <Map
