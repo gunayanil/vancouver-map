@@ -17,7 +17,7 @@ class App extends Component {
 
     componentDidMount() {
         fetch(
-            "https://api.foursquare.com/v2/venues/search?ll=49.2827291,-123.1207375&query=restaurant&client_id=WZAFHLFXX3BPD4BZDML1WR5G0MP1VGDV4INB04QN0HVU4TQQ&client_secret=1F0FFNXXAW0DBAB2K3Q0UFH2XZSVBLIMFKY5MUOHZV21F4GB&v=20180804"
+            "https://api.foursquare.com/v2/venues/search?ll=49.2827291,-123.1207375&query=restaurant&client_id=ID-HERE&client_secret=SECRET-HEREv=20180804"
         )
             .then(response => {
                 if (response.ok) {
@@ -102,7 +102,7 @@ class App extends Component {
                     openInfoHandler={this.openInfo}
                     closeInfoHandler={this.closeInfo}
                     markerID={this.state.markerID}
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBiE_oUg0mzVJbxj39WchHpyEO--o_rFQ&v=3"
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=KEY-HERE&v=3"
                     loadingElement={<div style={{ height: "100%" }} />}
                     containerElement={<div style={{ height: "100%" }} />}
                     mapElement={<div style={{ height: "100%" }} />}
